@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: PreferredSize(
+      appBar: PreferredSize(
         preferredSize: Size.fromHeight(152),
         child: Container(
           height: 152,
@@ -26,11 +26,10 @@ class HomePage extends StatelessWidget {
                   style: AppTextStyles.titleRegular,
                   children: [
                     TextSpan(
-                        text: 'Edson',
-                        style: AppTextStyles.titleBoldBackground)
+                        text: 'Edson', style: AppTextStyles.titleBoldBackground)
                   ])),
               subtitle: Text(
-                'Mantenha suas contas em dia',
+                'Busque por um novo Pokemon',
                 style: AppTextStyles.captionShape,
               ),
               trailing: Container(
@@ -40,16 +39,13 @@ class HomePage extends StatelessWidget {
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: Image.network('https://avatars.githubusercontent.com/u/9843924?v=4'!
-                  ,
-                ),
+                child: Image.network(
+                    'https://avatars.githubusercontent.com/u/9843924?v=4'),
               ),
             ),
           ),
         ),
       ),
-
-
       body: [
         FavoritePage(
           key: UniqueKey(),
@@ -69,7 +65,7 @@ class HomePage extends StatelessWidget {
                     controller.setPage(0);
                   },
                   icon: Icon(
-                    Icons.home,
+                    Icons.list,
                     color: controller.currentPage == 0
                         ? AppColors.primary
                         : AppColors.body,
@@ -77,21 +73,15 @@ class HomePage extends StatelessWidget {
             ),
             GestureDetector(
               child: Container(
-                height: 56,
-                width: 56,
-                decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(50)),
-                child: IconButton(
-                    onPressed: () async {
-                      Get.to(() => NewPokemon());
-                    },
-                    icon: Icon(
-                      Icons.favorite,
-                      color: AppColors.background,
-                    )),
-              ),
-              onTap: () {},
+                  height: 60,
+                  width: 60,
+                  child: IconButton(icon: Image(
+                    image: AssetImage('Poke_Ball_icon.png'),
+                  ), onPressed: () { Get.to(() => NewPokemon());  },),
+                ),
+              onTap: () {
+               
+              },
             ),
             Obx(
               () => IconButton(
