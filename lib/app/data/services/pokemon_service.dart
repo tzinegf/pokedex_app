@@ -1,4 +1,4 @@
-import 'dart:convert' as convert;
+import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:pokedex_flutter_app/app/data/models/pokemon_model.dart';
@@ -6,24 +6,21 @@ import 'package:pokedex_flutter_app/app/data/models/pokemon_model.dart';
 class PokemonService {
   var baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
 
-  Future getPokemon(String pokemon) async {
-    var url = Uri.parse('$baseUrl$pokemon');
+  Future getFilteredPokemon(String param) async {
+    var url = Uri.parse('$baseUrl$param');
     try {
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
-        var json = convert.jsonDecode(response.body);
-        
-        Pokemon pokemon = Pokemon.fromJson(json);
-          print('/******${pokemon.name}***********/');
+        var result = json.decode(response.body);
 
-        return pokemon;
+        return Pokemon.fromJson(result); 
       } else {
-        print('Falha ao receber os dados: ${response.statusCode}.');
-        //return('Falha ao receber os dados: ${response.statusCode}.');
+        print('/*******************erro***************/');
+        return 0;
       }
     } catch (e) {
-      return (e);
+      throw ('Erro:$e');
     }
   }
 }

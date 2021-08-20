@@ -5,17 +5,23 @@ import 'package:pokedex_flutter_app/app/data/repositories/pokemon_repositorie.da
 class PokemonController extends GetxController {
   PokemonRepositorie repositorie = PokemonRepositorie();
 
-  RxList<Pokemon> pokemons = <Pokemon>[].obs;
-  RxList<Pokemon> pokemonsFiltered = <Pokemon>[].obs;
+  final pokemons = <Pokemon>[].obs;
+  final pokemonsFiltered = <Pokemon>[].obs;
 
-  void getFilteredPokemon(String value) async {
+  Future <void> getFilteredPokemon(String value) async {
+    
     var x = await repositorie.getPokemon(value);
-    if (x != null) {
+
+    if (x != null && x != 0) {
+      pokemons.clear();
       pokemons.add(x);
-        pokemonsFiltered.value = pokemons
-        .where((u) => (u.name!.toLowerCase().contains(value.toLowerCase())))
-        .toList();
-  }
+      pokemonsFiltered.value=pokemons;
+    
+
+/*
+      pokemonsFiltered.value = pokemons
+          .where((u) => (u.name!.toLowerCase().contains(value.toLowerCase())))
+          .toList();*/
     }
-  
+  }
 }
