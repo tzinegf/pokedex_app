@@ -13,19 +13,25 @@ class EditPokemon extends StatelessWidget {
   PokemonDetailController pokemonDetailController =
       Get.put(PokemonDetailController());
 
+  TextEditingController textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     PokemonHelp pokemon = Get.arguments;
     pokemonDetailController.favorited.value = pokemon.favorited!;
+    pokemonDetailController.captured.value = pokemon.captured!;
+
+    textEditingController.text = pokemon.comments.toString();
     return Scaffold(
       appBar: AppBar(
         title: Text(pokemon.name.toString()),
-        actions: [
+        actions: [pokemon.captured==1?
           IconButton(
               onPressed: () {
-                pokemonDetailController.edit.value = !pokemonDetailController.edit.value;
+                pokemonDetailController.edit.value =
+                    !pokemonDetailController.edit.value;
               },
-              icon: Icon(Icons.edit))
+              icon: Icon(Icons.edit)):SizedBox()
         ],
         centerTitle: true,
       ),
@@ -45,13 +51,31 @@ class EditPokemon extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        Hero(
-                            tag: pokemon.name.toString(),
-                            child: Image.network(pokemon.sprites ?? '')),
+                        Stack(alignment: Alignment.bottomCenter, children: [
+                          Padding(
+                            padding: EdgeInsets.all(25),
+                            child: Hero(
+                                tag: pokemon.name.toString(),
+                                child: Image.network(pokemon.sprites ?? '')),
+                          ),
+                          pokemon.captured == 1
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  height: 50,
+                                  width: Get.width,
+                                  color: AppColors.primary,
+                                  child: Text(
+                                    'CAPTURADO',
+                                    textAlign: TextAlign.center,
+                                    style: AppTextStyles.titleBoldBackground,
+                                  ),
+                                )
+                              : SizedBox(),
+                        ]),
                       ],
                     ),
                     Obx(
-                      () => IconButton(
+                      () => pokemon.captured==1? IconButton(
                         onPressed: () {
                           if (pokemonDetailController.favorited.value == 0) {
                             pokemonDetailController.favorited.value = 1;
@@ -68,99 +92,125 @@ class EditPokemon extends StatelessWidget {
                         color: pokemonDetailController.favorited.value == 0
                             ? AppColors.grey
                             : AppColors.primary,
+                      ): IconButton(onPressed: null, icon: 
+                      Icon(Icons.remove_red_eye),
+                      iconSize: 50,
+                      color:pokemonDetailController.favorited.value == 0? AppColors.grey:AppColors.grey,
                       ),
                     ),
                   ],
                 ),
                 Card(
                   elevation: 2,
-                  color: Colors.yellowAccent,
+                  color: Colors.yellow[50],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   shadowColor: Colors.black87,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Sobre', style: AppTextStyles.titleBoldHeading),
-                      Text(controller.pokemons.first.toString(),
-                          style: AppTextStyles.titleBoldHeading),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                        child: Text(
-                          'Utilize esse campo para registrar todas as informações do seu Pokemon',
-                          textAlign: TextAlign.center,
-                          style: AppTextStyles.subTitleHeading,
+                  child: Obx(
+                    () => Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Sobre', style: AppTextStyles.subTitleHeadingDark),
+                        Text(pokemon.name.toString(),
+                            style: AppTextStyles.titleBoldHeading),
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                          child: pokemonDetailController.edit.value
+                              ? Text(
+                                  'Utilize esse campo para registrar todas as informações do seu Pokemon',
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyles.subTitleHeading,
+                                )
+                              : Text(
+                                  ' Informações do seu Pokemon',
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyles.subTitleHeading,
+                                ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 5),
-                        child: Obx(()=>
-                         TextField(
-                           
-                            enabled:pokemonDetailController.edit.value ,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 5),
+                          child: TextField(
+                            controller: textEditingController,
+                            enabled: pokemonDetailController.edit.value,
                             maxLines: 5,
-                            
                             decoration: InputDecoration(
                                 filled: true,
-                                fillColor: Colors.white,
+                                fillColor: Colors.yellow[100],
                                 disabledBorder: InputBorder.none,
                                 border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10)))),
-                          
-                          
                           ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 50,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.catching_pokemon,
-                                color: Colors.red,
-                                size: 30,
-                              ),
-                              onPressed: () async {
-                                await pokemonDetailController.create(
-                                    controller.pokemons.first, true, false);
-                              },
-                            ),
-                          ),
-                          Container(
-                            height: 50,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              color: Colors.lightGreen,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.remove_red_eye,
-                                color: Colors.white,
-                              ),
-                              onPressed: () async {
-                                await pokemonDetailController.create(
-                                    controller.pokemons.first, false, true);
-                              },
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
+                       // pokemonDetailController.edit.value &&
+                                pokemon.captured == 1
+                            ? Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    pokemonDetailController.edit.value?
+                                    Container(
+                                      height: 50,
+                                      width: 100,
+                                      
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        color: AppColors.grey,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: IconButton(
+                              
+                                        
+                                        icon: Icon(
+                                          Icons.save,
+                                          color: AppColors.shape,
+                                          
+                                          size: 30,
+                                        ),
+                                        onPressed:pokemonDetailController.edit.value? () async {
+                                         await pokemonDetailController
+                                              .addIformations(pokemon.id!, textEditingController.text);
+            
+                                        }:null,
+                                      ),
+                                    ):SizedBox(),
+                                  
+                                  ],
+                                ),
+                            )
+                            : Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                        height: 50,
+                                        width: 100,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          color: AppColors.grey,
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: TextButton(
+                                          
+                                          onPressed: () async {
+                                            await pokemonDetailController
+                                                .capturePokemon(pokemon.id!, 1);
+                                            pokemonDetailController.captured.value = 1;
+                                          },
+                                          child: Text('CAPTURAR',style: TextStyle(color: AppColors.shape),),
+                                        )),
+                                  ],
+                                ),
+                            )
+                      ],
+                    ),
                   ),
                 )
               ],

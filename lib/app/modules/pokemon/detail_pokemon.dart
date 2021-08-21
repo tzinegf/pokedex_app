@@ -73,6 +73,10 @@ class DetailPokemon extends StatelessWidget {
                               onPressed: () async {
                                 await pokemonDetailController.create(
                                     controller.pokemons.first, true, false);
+                                       Get.back();
+                                Get.snackbar(
+                                  
+                                    'Capturado', 'Você capturou esse Pokemon!',snackPosition: SnackPosition.BOTTOM,backgroundColor: AppColors.grey,colorText: AppColors.shape);
                               },
                             ),
                           ),
@@ -92,6 +96,11 @@ class DetailPokemon extends StatelessWidget {
                               onPressed: () async {
                                 await pokemonDetailController.create(
                                     controller.pokemons.first, false, true);
+                                    Get.back();
+                                Get.snackbar(
+                                  
+                                    'Avistado', 'Esse Pokemon foi marcado como visto!',snackPosition: SnackPosition.BOTTOM,backgroundColor: AppColors.grey,colorText: AppColors.shape);
+                                
                               },
                             ),
                           ),

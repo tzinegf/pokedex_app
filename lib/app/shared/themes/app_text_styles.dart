@@ -8,15 +8,25 @@ fontSize: 32,
 fontWeight: FontWeight.w600,
 color: AppColors.grey,
 );
-static  final subTitleHeading = GoogleFonts.lexendDeca(
+static  final subTitleHeadingDark = GoogleFonts.lexendDeca(
 fontSize: 15,
 fontWeight: FontWeight.w200,
 color: AppColors.grey
 );
-static  final subTitleBoldHeading = GoogleFonts.lexendDeca(
+static  final subTitleHeading = GoogleFonts.lexendDeca(
+fontSize: 15,
+fontWeight: FontWeight.w200,
+color: AppColors.shape
+);
+static  final subTitleBoldHeadingDark = GoogleFonts.lexendDeca(
 fontSize: 20,
 fontWeight: FontWeight.w400,
 color: AppColors.grey,
+);
+static  final subTitleBoldHeading = GoogleFonts.lexendDeca(
+fontSize: 20,
+fontWeight: FontWeight.w400,
+color: AppColors.shape,
 );
 static  final titleBoldHeading = GoogleFonts.lexendDeca(
 fontSize: 20,
@@ -26,6 +36,11 @@ color: AppColors.primary,
 static  final titleBoldBackground = GoogleFonts.lexendDeca(
 fontSize: 20,
 fontWeight: FontWeight.w600,
+color: AppColors.shape,
+);
+static  final titleBackground = GoogleFonts.lexendDeca(
+fontSize: 20,
+fontWeight: FontWeight.w200,
 color: AppColors.shape,
 );
 }

@@ -11,6 +11,7 @@ class PokemonDetailController extends GetxController {
 
   final pokemons = <PokemonHelp>[].obs;
   RxInt favorited = 0.obs;
+  RxInt captured = 0.obs;
   RxBool edit = false.obs;
 
   @override
@@ -25,6 +26,14 @@ class PokemonDetailController extends GetxController {
   Future<void> favoritePokemon(int id, int value) async {
     await crudRepositorie.favoritePokemon(id, value);
     favorited.value = value;
+  }
+  Future<void> capturePokemon(int id, int value) async {
+    await crudRepositorie.capturePokemon(id, value);
+    captured.value = value;
+  }
+  Future<void> addIformations(int id, String value) async {
+    await crudRepositorie.addIformations(id, value);
+  
   }
 
   Future<void> create(

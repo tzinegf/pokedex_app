@@ -33,13 +33,13 @@ class NewPokemon extends StatelessWidget {
                       hintStyle: TextStyle(
                         color: Colors.grey,
                       )),
-                  focusNode: _focusNode,
-                  autofocus: true,
+                 // focusNode: _focusNode,
+                 // autofocus: true,
                   onChanged: (value) {
                     if (value.length > 3) controller.getFilteredPokemon(value);
                     if (controller.pokemonsFiltered.isNotEmpty) {
                       searchController.clear();
-                      _focusNode.unfocus();
+                     // _focusNode.unfocus();
                       controller.pokemonsFiltered.value = [];
                     }
                   }),

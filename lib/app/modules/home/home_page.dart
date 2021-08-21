@@ -24,10 +24,10 @@ class HomePage extends StatelessWidget {
             child: ListTile(
               title: Text.rich(TextSpan(
                   text: 'Olá, ',
-                  style: AppTextStyles.titleHome,
+                  style: AppTextStyles.titleBoldBackground,
                   children: [
                     TextSpan(
-                        text: 'Edson', style: AppTextStyles.subTitleBoldHeading)
+                        text: 'Edson', style: AppTextStyles.titleBackground)
                   ])),
               subtitle: RichText(
                 text: TextSpan(text: 'Encontre seus pokemons ',style: AppTextStyles.subTitleHeading,

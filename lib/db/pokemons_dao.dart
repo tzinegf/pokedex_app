@@ -6,12 +6,11 @@ import 'package:sqflite/sqflite.dart';
 
 // Data Access Object
 class PokemonDAO {
-
-  DatabaseHelper instance =  DatabaseHelper();
+  DatabaseHelper instance = DatabaseHelper();
 
   Future<int> save(PokemonHelp pokemon) async {
-     final db = await instance.db;
-    var id = await db. insert("pokemons", pokemon.toJson(),
+    final db = await instance.db;
+    var id = await db.insert("pokemons", pokemon.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace);
     print('id: $id');
     return id;
@@ -22,16 +21,20 @@ class PokemonDAO {
 
     final list = await db.rawQuery('select * from pokemons');
 
-    final pokemons = list.map<PokemonHelp>((json) => PokemonHelp.fromJson(json)).toList();
+    final pokemons =
+        list.map<PokemonHelp>((json) => PokemonHelp.fromJson(json)).toList();
 
     return pokemons;
   }
-   Future<List<PokemonHelp>> findAllFavorites() async {
+
+  Future<List<PokemonHelp>> findAllFavorites() async {
     final db = await instance.db;
 
-    final list = await db.rawQuery('select * from pokemons where favorited = 1');
+    final list =
+        await db.rawQuery('select * from pokemons where favorited = 1');
 
-    final pokemons = list.map<PokemonHelp>((json) => PokemonHelp.fromJson(json)).toList();
+    final pokemons =
+        list.map<PokemonHelp>((json) => PokemonHelp.fromJson(json)).toList();
 
     return pokemons;
   }
@@ -39,26 +42,31 @@ class PokemonDAO {
   Future<List<PokemonHelp>> findAllByName(String name) async {
     final db = await instance.db;
 
-    final list = await db.rawQuery("select * from pokemons where name LIKE ?;",['%$name%']);
+    final list = await db
+        .rawQuery("select * from pokemons where name LIKE ?;", ['%$name%']);
 
-    final pokemons = list.map<PokemonHelp>((json) => PokemonHelp.fromJson(json)).toList();
+    final pokemons =
+        list.map<PokemonHelp>((json) => PokemonHelp.fromJson(json)).toList();
 
     return pokemons;
   }
-   Future<List<PokemonHelp>> findFavoriteByName(String name) async {
+
+  Future<List<PokemonHelp>> findFavoriteByName(String name) async {
     final db = await instance.db;
 
-    final list = await db.rawQuery("select * from pokemons where name LIKE ? and favorited = 1;",['%$name%']);
+    final list = await db.rawQuery(
+        "select * from pokemons where name LIKE ? and favorited = 1;",
+        ['%$name%']);
 
-    final pokemons = list.map<PokemonHelp>((json) => PokemonHelp.fromJson(json)).toList();
+    final pokemons =
+        list.map<PokemonHelp>((json) => PokemonHelp.fromJson(json)).toList();
 
     return pokemons;
   }
 
   Future<PokemonHelp?> findById(int id) async {
     final db = await instance.db;
-    final list =
-        await db.rawQuery('select * from pokemons where id = ?', [id]);
+    final list = await db.rawQuery('select * from pokemons where id = ?', [id]);
 
     if (list.length > 0) {
       return new PokemonHelp.fromJson(list.first);
@@ -72,6 +80,7 @@ class PokemonDAO {
     var exists = c != null;
     return exists;
   }
+
 /*
   Future<int> count() async {
     final db = await instance.db;
@@ -79,9 +88,24 @@ class PokemonDAO {
     return Sqflite.firstIntValue(list);
   }
 */
-Future<int> update(int id, int value) async {
+  Future<int> update(int id, int value) async {
     final db = await instance.db;
-    return await db.rawUpdate('UPDATE pokemons SET favorited = ? WHERE id = ?', [value, id]);
+    return await db.rawUpdate(
+        'UPDATE pokemons SET favorited = ? WHERE id = ?', [value, id]);
+  }
+
+  Future<int> capture(int id, int value) async {
+    final db = await instance.db;
+    return await db.rawUpdate(
+        'UPDATE pokemons SET captured = ?, observed = ?  WHERE id = ?',
+        [value, 0, id]);
+  }
+
+  Future<int> addIformations(int id, String value) async {
+    final db = await instance.db;
+    print('INformation');
+    return await db.rawUpdate(
+        'UPDATE pokemons SET comments = ?  WHERE id = ?', [value, id]);
   }
 
   Future<int> delete(int id) async {

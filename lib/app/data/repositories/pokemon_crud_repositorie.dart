@@ -32,6 +32,13 @@ Future getFavoritesPokemons() async {
     return await _pokemonDAO.update(id, value);
   }
 
+  Future capturePokemon(int id,int value) async {
+    return await _pokemonDAO.capture(id, value);
+  }
+  Future addIformations(int id,String value) async {
+    return await _pokemonDAO.addIformations(id, value);
+  }
+
 /*
   Future create(Pokemon value) async {
     return await pokemonDBSevice.create(value);
