@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokedex_flutter_app/app/modules/all_pokemons/all_pokemons.dart';
 import 'package:pokedex_flutter_app/app/modules/favorite/favorite_page.dart';
 import 'package:pokedex_flutter_app/app/modules/home/home_controller.dart';
 import 'package:pokedex_flutter_app/app/modules/pokemon/new_pokemon.dart';
@@ -46,21 +47,21 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: [
-        FavoritePage(
+      body: Obx(()=>[
+        AllPokemon(
           key: UniqueKey(),
         ),
-        HomePage(
+        FavoritePage
+        (
           key: UniqueKey(),
         ),
-      ][controller.currentPage.value],
+      ][controller.currentPage.value]),
       bottomNavigationBar: Container(
         height: 90,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Obx(
-              () => IconButton(
+            Obx(()=>IconButton(
                   onPressed: () {
                     controller.setPage(0);
                   },
@@ -69,22 +70,20 @@ class HomePage extends StatelessWidget {
                     color: controller.currentPage == 0
                         ? AppColors.primary
                         : AppColors.body,
-                  )),
-            ),
+                  )),),
+            
             GestureDetector(
               child: Container(
                   height: 60,
                   width: 60,
-                  child: IconButton(icon: Image(
-                    image: AssetImage('Poke_Ball_icon.png'),
+                  child: IconButton(icon: Icon(Icons.catching_pokemon, size: 50, color: AppColors.primary,
                   ), onPressed: () { Get.to(() => NewPokemon());  },),
                 ),
               onTap: () {
                
               },
             ),
-            Obx(
-              () => IconButton(
+             Obx(()=>IconButton(
                   onPressed: () {
                     controller.setPage(1);
                   },
@@ -93,8 +92,8 @@ class HomePage extends StatelessWidget {
                     color: controller.currentPage == 1
                         ? AppColors.primary
                         : AppColors.body,
-                  )),
-            ),
+                  )),)
+            
           ],
         ),
       ),

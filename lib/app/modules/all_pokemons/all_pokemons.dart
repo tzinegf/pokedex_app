@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokedex_flutter_app/app/modules/all_pokemons/all_pokemons_controller.dart';
 import 'package:pokedex_flutter_app/app/modules/pokemon/detail_pokemon.dart';
-import 'package:pokedex_flutter_app/app/modules/pokemon/pokemon_controller.dart';
 import 'package:pokedex_flutter_app/app/shared/themes/app_colors.dart';
 
-class NewPokemon extends StatelessWidget {
+class AllPokemon extends StatelessWidget {
   TextEditingController searchController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
-  NewPokemon({Key? key}) : super(key: key);
+  AllPokemon({Key? key}) : super(key: key);
 
-  PokemonController controller = Get.put(PokemonController());
+  AllPokemonsController controller = Get.put(AllPokemonsController());
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +36,12 @@ class NewPokemon extends StatelessWidget {
                   focusNode: _focusNode,
                   autofocus: true,
                   onChanged: (value) {
-                    if (value.length > 3) controller.getFilteredPokemon(value);
+                    controller.getFilteredPokemon(value);
                     if (controller.pokemonsFiltered.isNotEmpty) {
-                      searchController.clear();
-                      _focusNode.unfocus();
-                      controller.pokemonsFiltered.value = [];
+
+                      //searchController.clear();
+                      //_focusNode.unfocus();
+                     // controller.pokemonsFiltered.value = [];
                     }
                   }),
               Obx(
@@ -48,16 +49,16 @@ class NewPokemon extends StatelessWidget {
                   child: controller.pokemons.isNotEmpty
                       ? Obx(
                           () => ListView.builder(
-                              itemCount: controller.pokemons.length,
+                              itemCount:controller.pokemonsFiltered.length,
                               itemBuilder: (contex, index) {
                                 return ListTile(
                                   onTap:(){
                                     Get.to(()=>DetailPokemon());
                                     },
-                                  leading: Hero(tag: controller.pokemons.first.name.toString(), child: Image.network(controller.pokemons.first.sprites ??
+                                  leading:Hero(tag: controller.pokemonsFiltered[index].name.toString(), child: Image.network(controller.pokemonsFiltered[index].sprites??
                   '')),
                                   title: Text(
-                                      controller.pokemons[index].name ?? ''),
+                                      controller.pokemonsFiltered[index].name ?? ''),
                                 );
                               }),
                         )
