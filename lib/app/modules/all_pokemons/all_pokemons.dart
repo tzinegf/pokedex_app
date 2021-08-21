@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokedex_flutter_app/app/modules/all_pokemons/all_pokemons_controller.dart';
 import 'package:pokedex_flutter_app/app/modules/pokemon/detail_pokemon.dart';
+import 'package:pokedex_flutter_app/app/modules/pokemon/edit_pokemon.dart';
 import 'package:pokedex_flutter_app/app/shared/themes/app_colors.dart';
 
 class AllPokemon extends StatelessWidget {
   TextEditingController searchController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
+ // final FocusNode _focusNode = FocusNode();
 
   AllPokemon({Key? key}) : super(key: key);
 
@@ -18,7 +19,7 @@ class AllPokemon extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.primary,
-          title: Text('Pokemons'),
+          title: Text('Seus Pokemons'),
           centerTitle: true,
         ),
         body: Container(
@@ -33,16 +34,10 @@ class AllPokemon extends StatelessWidget {
                       hintStyle: TextStyle(
                         color: Colors.grey,
                       )),
-                  focusNode: _focusNode,
-                  autofocus: true,
+                 
                   onChanged: (value) {
                     controller.getFilteredPokemon(value);
-                    if (controller.pokemonsFiltered.isNotEmpty) {
-
-                      //searchController.clear();
-                      //_focusNode.unfocus();
-                     // controller.pokemonsFiltered.value = [];
-                    }
+                    
                   }),
               Obx(
                 () => Expanded(
@@ -53,10 +48,11 @@ class AllPokemon extends StatelessWidget {
                               itemBuilder: (contex, index) {
                                 return ListTile(
                                   onTap:(){
-                                    Get.to(()=>DetailPokemon());
+                                    Get.to(()=>EditPokemon(),arguments: controller.pokemonsFiltered[index]);
                                     },
                                   leading:Hero(tag: controller.pokemonsFiltered[index].name.toString(), child: Image.network(controller.pokemonsFiltered[index].sprites??
                   '')),
+                  trailing:controller.pokemonsFiltered[index].observed == 1?Icon(Icons.remove_red_eye):Icon(Icons.catching_pokemon),
                                   title: Text(
                                       controller.pokemonsFiltered[index].name ?? ''),
                                 );

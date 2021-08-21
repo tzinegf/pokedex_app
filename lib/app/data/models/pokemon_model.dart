@@ -8,6 +8,7 @@ class Pokemon {
    String? comments;
    bool? captured;
    bool? observed;
+   bool? favorited;
    Sprites? sprites;
 
   Pokemon({
@@ -16,6 +17,7 @@ class Pokemon {
     this.comments,
     this.captured,
     this.observed, 
+    this.favorited, 
     this.sprites,
   });
 
@@ -26,6 +28,7 @@ class Pokemon {
     comments = json['comments'];
     captured = json['captured'];
     observed = json['observed'];
+    favorited = json['favorited'];
     sprites =
         json['sprites'] != null ? new Sprites.fromJson(json['sprites']) : null;
   }
@@ -37,6 +40,7 @@ class Pokemon {
     data['comments'] = this.comments;
     data['captured'] = this.captured;
     data['observed'] = this.observed;
+    data['favorited'] = this.favorited;
     if (this.sprites != null) {
       data['sprites'] = this.sprites!.toJson();
     }

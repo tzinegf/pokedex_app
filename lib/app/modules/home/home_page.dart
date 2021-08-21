@@ -24,14 +24,17 @@ class HomePage extends StatelessWidget {
             child: ListTile(
               title: Text.rich(TextSpan(
                   text: 'Olá, ',
-                  style: AppTextStyles.titleRegular,
+                  style: AppTextStyles.titleHome,
                   children: [
                     TextSpan(
-                        text: 'Edson', style: AppTextStyles.titleBoldBackground)
+                        text: 'Edson', style: AppTextStyles.subTitleBoldHeading)
                   ])),
-              subtitle: Text(
-                'Busque por um novo Pokemon',
-                style: AppTextStyles.captionShape,
+              subtitle: RichText(
+                text: TextSpan(text: 'Encontre seus pokemons ',style: AppTextStyles.subTitleHeading,
+                  children: <TextSpan>[TextSpan(text: 'visualizados ',style: AppTextStyles.subTitleBoldHeading),TextSpan(text: 'e '),TextSpan(text: 'capturados',style:AppTextStyles.subTitleBoldHeading)]
+                 ),
+              
+                
               ),
               trailing: Container(
                 height: 48,

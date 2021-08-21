@@ -26,11 +26,29 @@ class PokemonDAO {
 
     return pokemons;
   }
+   Future<List<PokemonHelp>> findAllFavorites() async {
+    final db = await instance.db;
+
+    final list = await db.rawQuery('select * from pokemons where favorited = 1');
+
+    final pokemons = list.map<PokemonHelp>((json) => PokemonHelp.fromJson(json)).toList();
+
+    return pokemons;
+  }
 
   Future<List<PokemonHelp>> findAllByName(String name) async {
     final db = await instance.db;
 
     final list = await db.rawQuery("select * from pokemons where name LIKE ?;",['%$name%']);
+
+    final pokemons = list.map<PokemonHelp>((json) => PokemonHelp.fromJson(json)).toList();
+
+    return pokemons;
+  }
+   Future<List<PokemonHelp>> findFavoriteByName(String name) async {
+    final db = await instance.db;
+
+    final list = await db.rawQuery("select * from pokemons where name LIKE ? and favorited = 1;",['%$name%']);
 
     final pokemons = list.map<PokemonHelp>((json) => PokemonHelp.fromJson(json)).toList();
 
@@ -61,6 +79,11 @@ class PokemonDAO {
     return Sqflite.firstIntValue(list);
   }
 */
+Future<int> update(int id, int value) async {
+    final db = await instance.db;
+    return await db.rawUpdate('UPDATE pokemons SET favorited = ? WHERE id = ?', [value, id]);
+  }
+
   Future<int> delete(int id) async {
     final db = await instance.db;
     return await db.rawDelete('delete from pokemons where id = ?', [id]);

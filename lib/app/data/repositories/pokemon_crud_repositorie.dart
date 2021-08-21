@@ -19,6 +19,19 @@ Future getAllPokemons() async {
  Future readPokemon(String value) async {
     return await _pokemonDAO.findAllByName(value);
   }
+  
+Future getFavoritesPokemons() async {
+    return await _pokemonDAO.findAllFavorites();
+  }
+  Future findFavoriteByName(String value) async {
+    return await _pokemonDAO.findFavoriteByName(value);
+  }
+
+
+  Future favoritePokemon(int id,int value) async {
+    return await _pokemonDAO.update(id, value);
+  }
+
 /*
   Future create(Pokemon value) async {
     return await pokemonDBSevice.create(value);

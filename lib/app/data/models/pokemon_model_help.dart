@@ -8,6 +8,7 @@ class PokemonHelp {
    String? comments;
    int? captured;
    int? observed;
+   int? favorited;
    String? sprites;
 
   PokemonHelp({
@@ -16,6 +17,7 @@ class PokemonHelp {
     this.comments,
     this.captured,
     this.observed, 
+    this.favorited, 
     this.sprites,
   });
 
@@ -26,6 +28,7 @@ class PokemonHelp {
     comments = json['comments'];
     captured = json['captured'];
     observed = json['observed'];
+    favorited = json['favorited'];
     sprites =json['sprites'];
    }
 
@@ -36,6 +39,7 @@ class PokemonHelp {
     data['comments'] = this.comments;
     data['captured'] = this.captured;
     data['observed'] = this.observed;
+    data['favorited'] = this.favorited;
     data['sprites'] = this.sprites;
 
     return data;

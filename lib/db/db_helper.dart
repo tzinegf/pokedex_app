@@ -33,7 +33,7 @@ class DatabaseHelper {
   void _onCreate(Database db, int newVersion) async {
     await db.execute(
         'CREATE TABLE pokemons(id INTEGER PRIMARY KEY, name TEXT, comments TEXT'
-        ', captured BOOLEAN, observed BOOLEAN, sprites TEXT);');
+        ', captured BOOLEAN, observed BOOLEAN,favorited BOOLEAN, sprites TEXT);');
   }
 
   Future close() async {

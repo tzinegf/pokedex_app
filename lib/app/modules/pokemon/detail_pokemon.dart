@@ -11,7 +11,7 @@ class DetailPokemon extends StatelessWidget {
   PokemonController controller = Get.find<PokemonController>();
   PokemonDetailController pokemonDetailController =
       Get.put(PokemonDetailController());
- 
+
   @override
   Widget build(BuildContext context) {
     pokemonDetailController.addPokemonToDatabase(controller.pokemons.first);
@@ -31,28 +31,12 @@ class DetailPokemon extends StatelessWidget {
             margin: EdgeInsets.all(16),
             child: Column(
               children: [
-                Stack(
-                  alignment: Alignment.topRight,
+                Column(
                   children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.favorite),
-                      iconSize: 50,
-                      color: AppColors.primary,
-                      disabledColor: Colors.black45,
-                    ),
-                    Column(
-                      children: [
-                        Hero(
-                            tag: controller.pokemons.first.name.toString(),
-                            child: Image.network(controller
-                                    .pokemons
-                                    .first
-                                    .sprites
-                                     ??
-                                '')),
-                      ],
-                    ),
+                    Hero(
+                        tag: controller.pokemons.first.name.toString(),
+                        child: Image.network(
+                            controller.pokemons.first.sprites ?? '')),
                   ],
                 ),
                 Card(
@@ -72,54 +56,47 @@ class DetailPokemon extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                      
-                        Container(
-                          
-        
-                          height: 50,
-                          width: 100,
-                        
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                          Container(
+                            height: 50,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.catching_pokemon,
+                                color: Colors.red,
+                                size: 30,
+                              ),
+                              onPressed: () async {
+                                await pokemonDetailController.create(
+                                    controller.pokemons.first, true, false);
+                              },
+                            ),
                           ),
-                          
-                      
-                        child: IconButton(
-                          icon: Icon(Icons.catching_pokemon,color: Colors.red,size: 30,),
-                        
-                          
-                          onPressed: () async{
-                            await pokemonDetailController.create(controller.pokemons.first);
-                          },
-                         
-                        ),
-                      ),
-                      Container(
-                          
-        
-                          height: 50,
-                          width: 100,
-                        
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            color: Colors.lightGreen,
-                            borderRadius: BorderRadius.circular(10),
+                          Container(
+                            height: 50,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              color: Colors.lightGreen,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.remove_red_eye,
+                                color: Colors.white,
+                              ),
+                              onPressed: () async {
+                                await pokemonDetailController.create(
+                                    controller.pokemons.first, false, true);
+                              },
+                            ),
                           ),
-                          
-                      
-                        child: IconButton(
-                          icon: Icon(Icons.remove_red_eye,color: Colors.white,),
-                        
-                          
-                          onPressed: () async{
-                            await pokemonDetailController.create(controller.pokemons.first);
-                          },
-                         
-                        ),
-                      ),
-                      ],)
+                        ],
+                      )
                     ],
                   ),
                 )

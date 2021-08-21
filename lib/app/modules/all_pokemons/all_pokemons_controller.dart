@@ -6,6 +6,7 @@ import 'package:pokedex_flutter_app/app/data/repositories/pokemon_repositorie.da
 
 class AllPokemonsController extends GetxController {
   PokemonCrudRepositorie repositorie = PokemonCrudRepositorie();
+  
 
   final pokemons = <PokemonHelp>[].obs;
   final pokemonsFiltered = <PokemonHelp>[].obs;
@@ -25,8 +26,9 @@ class AllPokemonsController extends GetxController {
     pokemonsFiltered.value = await repositorie.readPokemon(value);
 
     if (pokemonsFiltered.isNotEmpty) {
+
     } else {
-      getAllPokemons();
+      pokemons.value = await repositorie.getAllPokemons();
     }
   }
 }

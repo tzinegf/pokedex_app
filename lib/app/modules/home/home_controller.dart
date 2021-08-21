@@ -12,14 +12,14 @@ class HomeController extends GetxController {
   void setPage(int index) {
     currentPage.value = index;
   }
-
+/*
 void filterPokemon(){
 pokemonFilter.value = allPokemons.where((u) => (u.nome
                             .toLowerCase()
                             .contains(u.toLowerCase())))
                         .toList() ;
 }
-
+*/
 
 
 
