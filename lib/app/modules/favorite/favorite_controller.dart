@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pokedex_flutter_app/app/data/models/pokemon_model.dart';
 import 'package:pokedex_flutter_app/app/data/models/pokemon_model_help.dart';
 import 'package:pokedex_flutter_app/app/data/repositories/pokemon_crud_repositorie.dart';
-import 'package:pokedex_flutter_app/app/data/repositories/pokemon_repositorie.dart';
 
 class FavoriteController extends GetxController {
   PokemonCrudRepositorie repositorie = PokemonCrudRepositorie();

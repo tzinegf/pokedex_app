@@ -11,7 +11,7 @@ class EditPokemon extends StatelessWidget {
   EditPokemon({Key? key}) : super(key: key);
   AllPokemonsController controller = Get.find<AllPokemonsController>();
   PokemonDetailController pokemonDetailController =
-  Get.put(PokemonDetailController());
+      Get.put(PokemonDetailController());
   FavoriteController favoriteController = Get.put(FavoriteController());
 
   TextEditingController textEditingController = TextEditingController();
@@ -123,7 +123,7 @@ class EditPokemon extends StatelessWidget {
                   shadowColor: AppColors.grey,
                   child: Obx(
                     () => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                     mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
                             child: Text(
@@ -131,43 +131,54 @@ class EditPokemon extends StatelessWidget {
                           style: AppTextStyles.titleBoldHeading,
                           textAlign: TextAlign.center,
                         )),
-
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: RichText(
-                            text: TextSpan(
-                                text: 'Nome:',
-                                style: AppTextStyles.subTitleHeadingDark,
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: '${pokemon.name}\n',
-                                      style: AppTextStyles.subTitleHeadingDark),
-                                  TextSpan(
-                                      text: 'Numero:',
-                                      style: AppTextStyles.subTitleHeadingDark),
-                                  TextSpan(
-                                      text: '${pokemon.id}\n',
-                                      style: AppTextStyles.subTitleHeadingDark),
-                                  TextSpan(
-                                      text: 'Peso:',
-                                      style: AppTextStyles.subTitleHeadingDark),
-                                  TextSpan(
-                                      text: '' +
-                                          (pokemon.weight! / 10).toString() +
-                                          'kg\n',
-                                      style: AppTextStyles.subTitleHeadingDark),
-                                  TextSpan(
-                                      text: 'Altura:',
-                                      style: AppTextStyles.subTitleHeadingDark),
-                                  TextSpan(
-                                      text: '' +
-                                          (pokemon.height! / 10).toString() +
-                                          'm\n',
-                                      style: AppTextStyles.subTitleHeadingDark)
-                                ]),
-                          ),
-                        ),
-
+                        Container(
+                            height: 230,
+                            child: ListView(
+                              children: [
+                                ListTile(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 60, vertical: 0),
+                                    title: Text('Nome',
+                                        style: AppTextStyles
+                                            .subTitleBoldHeadingDark),
+                                    trailing: Text('${pokemon.name}',
+                                        style: AppTextStyles
+                                            .subTitleBoldHeadingDark)),
+                                ListTile(
+                                    contentPadding:
+                                        EdgeInsets.symmetric(horizontal: 60),
+                                    title: Text('Numero',
+                                        style: AppTextStyles
+                                            .subTitleBoldHeadingDark),
+                                    trailing: Text('${pokemon.id}',
+                                        style: AppTextStyles
+                                            .subTitleBoldHeadingDark)),
+                                ListTile(
+                                    contentPadding:
+                                        EdgeInsets.symmetric(horizontal: 60),
+                                    title: Text('Peso',
+                                        style: AppTextStyles
+                                            .subTitleBoldHeadingDark),
+                                    trailing: Text(
+                                        '' +
+                                            (pokemon.weight! / 10).toString() +
+                                            ' kg',
+                                        style: AppTextStyles
+                                            .subTitleBoldHeadingDark)),
+                                ListTile(
+                                    contentPadding:
+                                        EdgeInsets.symmetric(horizontal: 60),
+                                    title: Text('Altura',
+                                        style: AppTextStyles
+                                            .subTitleBoldHeadingDark),
+                                    trailing: Text(
+                                        '' +
+                                            (pokemon.height! / 10).toString() +
+                                            ' m',
+                                        style: AppTextStyles
+                                            .subTitleBoldHeadingDark)),
+                              ],
+                            )),
                         Container(
                           padding:
                               EdgeInsets.symmetric(horizontal: 25, vertical: 5),
@@ -259,7 +270,6 @@ class EditPokemon extends StatelessWidget {
                                   children: [
                                     Container(
                                         height: 50,
-                                        
                                         decoration: BoxDecoration(
                                           shape: BoxShape.rectangle,
                                           color: AppColors.grey,
@@ -286,15 +296,18 @@ class EditPokemon extends StatelessWidget {
                                           child: Row(
                                             children: [
                                               Text(
-                                              'CAPTURAR',
-                                              style: TextStyle(
-                                                  color: AppColors.shape),
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Icon(Icons.catching_pokemon,color: AppColors.primary,)
-                                            ], 
+                                                'CAPTURAR',
+                                                style: TextStyle(
+                                                    color: AppColors.shape),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Icon(
+                                                Icons.catching_pokemon,
+                                                color: AppColors.primary,
+                                              )
+                                            ],
                                           ),
                                         )),
                                   ],

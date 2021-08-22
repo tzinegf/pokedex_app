@@ -11,9 +11,11 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
   HomeController controller = Get.put(HomeController());
+  var name = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
+  
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(152),
@@ -26,45 +28,55 @@ class HomePage extends StatelessWidget {
                   text: 'Olá, ',
                   style: AppTextStyles.titleBoldBackground,
                   children: [
-                    TextSpan(
-                        text: 'Edson', style: AppTextStyles.titleBackground)
+                    TextSpan(text: name, style: AppTextStyles.titleBackground)
                   ])),
               subtitle: RichText(
-                text: TextSpan(text: 'Encontre seus pokemons ',style: AppTextStyles.subTitleHeading,
-                  children: <TextSpan>[TextSpan(text: 'visualizados ',style: AppTextStyles.subTitleBoldHeading),TextSpan(text: 'e '),TextSpan(text: 'capturados',style:AppTextStyles.subTitleBoldHeading)]
-                 ),
-              
-                
+                text: TextSpan(
+                    text: 'Encontre seus pokemons ',
+                    style: AppTextStyles.subTitleHeading,
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'visualizados, ',
+                          style: AppTextStyles.subTitleBoldHeading),
+                      
+                      TextSpan(
+                          text: 'capturados',
+                          style: AppTextStyles.subTitleBoldHeading),
+                          TextSpan(text: ' e '),
+                          TextSpan(
+                          text: 'Favoritos',
+                          style: AppTextStyles.subTitleBoldHeading),
+                          
+                    ]),
               ),
               trailing: Container(
                 height: 48,
                 width: 48,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: Image.network(
-                    'https://avatars.githubusercontent.com/u/9843924?v=4'),
+                child: Icon(Icons.person,size: 50,)
               ),
             ),
           ),
         ),
       ),
-      body: Obx(()=>[
-        AllPokemon(
-          key: UniqueKey(),
-        ),
-        FavoritePage
-        (
-          key: UniqueKey(),
-        ),
-      ][controller.currentPage.value]),
+      body: Obx(() => [
+            AllPokemon(
+              key: UniqueKey(),
+            ),
+            FavoritePage(
+              key: UniqueKey(),
+            ),
+          ][controller.currentPage.value]),
       bottomNavigationBar: Container(
         height: 90,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Obx(()=>IconButton(
+            Obx(
+              () => IconButton(
                   onPressed: () {
                     controller.setPage(0);
                   },
@@ -73,20 +85,27 @@ class HomePage extends StatelessWidget {
                     color: controller.currentPage.value == 0
                         ? AppColors.primary
                         : AppColors.secudaryColor,
-                  )),),
-            
+                  )),
+            ),
             GestureDetector(
               child: Container(
-                  height: 60,
-                  width: 60,
-                  child: IconButton(icon: Icon(Icons.catching_pokemon, size: 50, color: AppColors.primary,
-                  ), onPressed: () { Get.to(() => NewPokemon());  },),
+                height: 60,
+                width: 60,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.catching_pokemon,
+                    size: 50,
+                    color: AppColors.primary,
+                  ),
+                  onPressed: () {
+                    Get.to(() => NewPokemon());
+                  },
                 ),
-              onTap: () {
-               
-              },
+              ),
+              onTap: () {},
             ),
-             Obx(()=>IconButton(
+            Obx(
+              () => IconButton(
                   onPressed: () {
                     controller.setPage(1);
                   },
@@ -95,8 +114,8 @@ class HomePage extends StatelessWidget {
                     color: controller.currentPage.value == 1
                         ? AppColors.primary
                         : AppColors.secudaryColor,
-                  )),)
-            
+                  )),
+            )
           ],
         ),
       ),

@@ -9,7 +9,7 @@ class DetailPokemon extends StatelessWidget {
   DetailPokemon({Key? key}) : super(key: key);
   PokemonController controller = Get.find<PokemonController>();
   PokemonDetailController pokemonDetailController =
-  Get.put(PokemonDetailController());
+      Get.put(PokemonDetailController());
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +48,21 @@ class DetailPokemon extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Novo Pokemon descoberto', style: AppTextStyles.subTitleBoldHeadingDark),
+                      Text('Novo Pokemon descoberto',
+                          style: AppTextStyles.subTitleBoldHeadingDark),
                       Text(controller.pokemons.first.name.toString(),
                           style: AppTextStyles.titleBoldHeading),
-                          SizedBox(height: 10,),
-                          Text('Você pode captura-lo ou apenas marcar como visto.', style: AppTextStyles.subTitleHeadingDark,textAlign: TextAlign.center,),
-                          SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Você pode captura-lo ou apenas marcar como visto.',
+                        style: AppTextStyles.subTitleHeadingDark,
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: Row(
@@ -63,41 +72,43 @@ class DetailPokemon extends StatelessWidget {
                             GestureDetector(
                               child: Container(
                                 width: 150,
-                               
-                              
                                 decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
                                   color: AppColors.grey,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Column(
-                                
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 5,bottom: 2),
-                                      child: Text('CAPTURAR',style: AppTextStyles.subTitleBoldHeading,),
+                                      padding: const EdgeInsets.only(
+                                          top: 5, bottom: 2),
+                                      child: Text(
+                                        'CAPTURAR',
+                                        style:
+                                            AppTextStyles.subTitleBoldHeading,
+                                      ),
                                     ),
                                     Icon(Icons.catching_pokemon,
-                                        color: AppColors.primary,
-                                        size: 30)
-                                      
-                                    
+                                        color: AppColors.primary, size: 30)
                                   ],
                                 ),
                               ),
-                              onTap: ()async{
-                                                await pokemonDetailController.create(
-                                            controller.pokemons.first, true, false);
-                                               Get.back();
-                                        Get.snackbar(
-                                            'Capturado', 'Você capturou esse Pokemon!',snackPosition: SnackPosition.BOTTOM,backgroundColor: AppColors.grey,colorText: AppColors.shape);
+                              onTap: () async {
+                                await pokemonDetailController.create(
+                                    controller.pokemons.first, true, false);
+                                Get.back();
+                                Get.snackbar(
+                                    'Capturado', 'Você capturou esse Pokemon!',
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    backgroundColor: AppColors.grey,
+                                    colorText: AppColors.shape);
+                                pokemonDetailController.controller
+                                    .getAllPokemons();
                               },
                             ),
                             GestureDetector(
                               child: Container(
                                 width: 150,
-                               
-                              
                                 decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
                                   color: AppColors.grey,
@@ -106,26 +117,33 @@ class DetailPokemon extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 5,bottom: 2),
-                                      child: Text('VISTO',style: AppTextStyles.subTitleBoldHeading,),
-                                    ),
-                            
-                                    Icon(
-                                        Icons.remove_red_eye,
-                                        color: Colors.green,
-                                        size: 30,
+                                      padding: const EdgeInsets.only(
+                                          top: 5, bottom: 2),
+                                      child: Text(
+                                        'VISTO',
+                                        style:
+                                            AppTextStyles.subTitleBoldHeading,
                                       ),
+                                    ),
+                                    Icon(
+                                      Icons.remove_red_eye,
+                                      color: Colors.green,
+                                      size: 30,
+                                    ),
                                   ],
                                 ),
                               ),
-                              onTap: ()async{
+                              onTap: () async {
                                 await pokemonDetailController.create(
-                                            controller.pokemons.first, false, true);
-                                            Get.back();
-                                        Get.snackbar(
-                                          
-                                            'Avistado', 'Esse Pokemon foi marcado como visto!',snackPosition: SnackPosition.BOTTOM,backgroundColor: AppColors.grey,colorText: AppColors.shape);
-
+                                    controller.pokemons.first, false, true);
+                                Get.back();
+                                Get.snackbar('Avistado',
+                                    'Esse Pokemon foi marcado como visto!',
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    backgroundColor: AppColors.grey,
+                                    colorText: AppColors.shape);
+                                    pokemonDetailController.controller
+                                    .getAllPokemons();
                               },
                             ),
                           ],

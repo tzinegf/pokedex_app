@@ -92,7 +92,7 @@ class LoginPage extends StatelessWidget {
                           var x = await controller.login(
                               userController.text, passwordController.text);
                           if (x) {
-                            Get.offAndToNamed('/home');
+                            Get.toNamed('/home',arguments: userController.text);
                           } else {
                             Get.defaultDialog(title: 'Erro',middleText:'Usuário não registrado',radius: 10);
                           }
