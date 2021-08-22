@@ -3,11 +3,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   SharedPreferences? preferences;
+  var viewPass = false.obs;
 
-  Future<void> saveCredentials(String user, String password) async {
+
+  Future<bool> login(String user, String password) async {
     preferences = await SharedPreferences.getInstance();
-    preferences!.setString('user', user);
-    preferences!.setString('password', password);
+    var u =  preferences!.getString(user);
+    var p =  preferences!.getString('password');
+    if (user == u && password == p) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokedex_flutter_app/app/modules/all_pokemons/all_pokemons_controller.dart';
-import 'package:pokedex_flutter_app/app/modules/pokemon/detail_pokemon.dart';
 import 'package:pokedex_flutter_app/app/modules/pokemon/edit_pokemon.dart';
 import 'package:pokedex_flutter_app/app/shared/themes/app_colors.dart';
 
 class AllPokemon extends StatelessWidget {
   TextEditingController searchController = TextEditingController();
- // final FocusNode _focusNode = FocusNode();
+
 
   AllPokemon({Key? key}) : super(key: key);
 
@@ -21,8 +20,7 @@ class AllPokemon extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           
-          
-
+        
           backgroundColor: AppColors.primary,
           title: Text('Seus Pokemons'),
           centerTitle: true,

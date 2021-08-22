@@ -3,6 +3,7 @@
 
 class Routes {
   static const LOGIN_PAGE = '/';
+  static const SING_UP_PAGE = '/sing_up';
   static const HOME_PAGE = '/home';
   static const FAVORITE_PAGE = '/favorite';
   static const NEW_POKEMON_PAGE = '/new_pokemon';

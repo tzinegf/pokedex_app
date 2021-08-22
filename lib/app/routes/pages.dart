@@ -4,6 +4,7 @@ import 'package:pokedex_flutter_app/app/modules/login/login_page.dart';
 import 'package:pokedex_flutter_app/app/modules/pokemon/detail_pokemon.dart';
 import 'package:pokedex_flutter_app/app/modules/pokemon/edit_pokemon.dart';
 import 'package:pokedex_flutter_app/app/modules/pokemon/new_pokemon.dart';
+import 'package:pokedex_flutter_app/app/modules/sing_up/sing_up_page.dart';
 import 'package:pokedex_flutter_app/app/routes/routes.dart';
 
 //Definição de array com todas a rotas utilizadas pelo Get
@@ -16,6 +17,7 @@ class Pages{
     GetPage(name: Routes.NEW_POKEMON_PAGE, page:() => NewPokemon()),
     GetPage(name: Routes.EDIT_POKEMON_PAGE, page:() => EditPokemon()),
     GetPage(name: Routes.DETAIL_POKEMON_PAGE, page:() => DetailPokemon()),
+    GetPage(name: Routes.SING_UP_PAGE, page:() => SingUpPage()),
   
   ];
 }

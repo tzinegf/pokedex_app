@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokedex_flutter_app/app/routes/pages.dart';
 import 'package:pokedex_flutter_app/app/routes/routes.dart';
+import 'package:pokedex_flutter_app/app/shared/themes/app_colors.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
      debugShowCheckedModeBanner:false,
       initialRoute: Routes.LOGIN_PAGE,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: AppColors.primary
       ),
       
     );

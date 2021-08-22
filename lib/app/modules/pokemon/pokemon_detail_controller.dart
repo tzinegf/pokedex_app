@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pokedex_flutter_app/app/data/models/pokemon_model.dart';
 import 'package:pokedex_flutter_app/app/data/models/pokemon_model_help.dart';
 import 'package:pokedex_flutter_app/app/data/repositories/pokemon_crud_repositorie.dart';
-import 'package:pokedex_flutter_app/app/data/repositories/pokemon_repositorie.dart';
 import 'package:pokedex_flutter_app/app/modules/all_pokemons/all_pokemons_controller.dart';
 
 class PokemonDetailController extends GetxController {
@@ -27,17 +25,18 @@ class PokemonDetailController extends GetxController {
     await crudRepositorie.favoritePokemon(id, value);
     favorited.value = value;
   }
+
   Future<void> capturePokemon(int id, int value) async {
     await crudRepositorie.capturePokemon(id, value);
     captured.value = value;
   }
+
   Future<void> addIformations(int id, String value) async {
     await crudRepositorie.addIformations(id, value);
-  
   }
 
   Future<void> create(
-      PokemonHelp pokemon, bool isCaptured, bool isObserved) async {
+    PokemonHelp pokemon, bool isCaptured, bool isObserved) async {
     pokemon.captured = isCaptured ? 1 : 0;
     pokemon.observed = isObserved ? 1 : 0;
     await crudRepositorie.create(pokemon);

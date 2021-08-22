@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
 
@@ -29,14 +27,13 @@ class DatabaseHelper {
     var db = await openDatabase(path, version: 2, onCreate: _onCreate);
     return db;
   }
-
+//Método para criar uma nova tabela no DB
   void _onCreate(Database db, int newVersion) async {
     await db.execute(
         'CREATE TABLE pokemons(id INTEGER PRIMARY KEY, name TEXT, comments TEXT'
         ', captured BOOLEAN, observed BOOLEAN,favorited BOOLEAN, sprites TEXT,height INTEGER,weight INTEGER);');
-      
   }
-
+//Método para fechar a conexão com o DB
   Future close() async {
     var dbClient = await db;
     return dbClient.close();

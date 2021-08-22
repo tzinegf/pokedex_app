@@ -3,13 +3,17 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokedex_flutter_app/app/modules/login/login_controller.dart';
+import 'package:pokedex_flutter_app/app/modules/sing_up/sing_up_controller.dart';
+import 'package:pokedex_flutter_app/app/shared/themes/app_colors.dart';
 import 'package:pokedex_flutter_app/app/shared/themes/app_text_styles.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
-  LoginController controller = Get.put(LoginController());
+class SingUpPage extends StatelessWidget {
+  SingUpPage({Key? key}) : super(key: key);
+  SingUpController controller = Get.put(SingUpController());
+
   TextEditingController userController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -24,29 +28,37 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                    height: 100,
-                    width: 100,
-                    child: Hero(
-                        tag: 'Poke_Ball',
-                        child: Image.asset('Poke_Ball_icon.png'))),
-                Text(
-                  'Pokédex ',
-                  style: AppTextStyles.titleHome,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Registre-se ',
+                      style: AppTextStyles.titleHome,
+                    ),
+                    Container(
+                        height: 50,
+                        width: 50,
+                        child: Hero(
+                            tag: 'Poke_Ball',
+                            child: Image.asset('Poke_Ball_icon.png'))),
+                  ],
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   child: TextFormField(
-                    controller: userController,
-                    decoration: InputDecoration(
-                        hintText: 'Usuário', border: OutlineInputBorder()),
-                    validator: (value) {
-                      if (value == '' || value!.isEmpty) {
-                        return 'Usuário inválido!';
-                      }
-                      return null;
-                    },
-                  ),
+                      controller: userController,
+                      decoration: InputDecoration(
+                          hintText: 'Informe um nome de usuário',
+                          border: OutlineInputBorder()),
+                      validator: (value) {
+                        if (value == '' || value!.isEmpty) {
+                          return 'Usuário inválido!';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        // model.senha=value!;
+                      }),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -64,7 +76,7 @@ class LoginPage extends StatelessWidget {
                                 ? Icons.remove_red_eye
                                 : Icons.visibility_off),
                           ),
-                          hintText: 'Senha',
+                          hintText: 'Informe uma nova senha',
                           border: OutlineInputBorder()),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -75,8 +87,31 @@ class LoginPage extends StatelessWidget {
                         }
                         return null;
                       },
+                      onSaved: (value) {
+                        // model.senha=value!;
+                      },
                     ),
                   ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  child: TextFormField(
+                      controller: passwordConfirmController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          hintText: 'Confirme sua senha',
+                          border: OutlineInputBorder()),
+                      validator: (value) {
+                        if (passwordConfirmController.text !=
+                            passwordController.text) {
+                          return 'As senhas não coincidem!';
+                        }
+
+                        return null;
+                      },
+                      onSaved: (value) {
+                        // model.senha=value!;
+                      }),
                 ),
                 SizedBox(
                   width: 200,
@@ -89,17 +124,27 @@ class LoginPage extends StatelessWidget {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-                          var x = await controller.login(
-                              userController.text, passwordController.text);
+                          var x = await controller.saveCredentials(
+                              userController.text,
+                              passwordConfirmController.text);
                           if (x) {
-                            Get.offAndToNamed('/home');
+                            Get.back();
+                            Get.snackbar(
+                                'Registro', 'Usuário registrado com sucesso.',
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: AppColors.grey,
+                                colorText: AppColors.shape);
+                            
                           } else {
-                            Get.defaultDialog(title: 'Erro',middleText:'Usuário não registrado',radius: 10);
+                            Get.defaultDialog(
+                                title: 'Erro',
+                                middleText: 'Usuário já registrado.',
+                                radius: 10);
                           }
                         }
                       },
                       child: Text(
-                        'Entrar',
+                        'Registrar',
                         style: AppTextStyles.titleBackground,
                       )),
                 ),
@@ -107,11 +152,11 @@ class LoginPage extends StatelessWidget {
                   child: Container(
                       padding: EdgeInsets.only(top: 30),
                       child: Text(
-                        'Não tem conta?',
+                        'Entrar',
                         style: AppTextStyles.subTitleHeadingDark,
                       )),
                   onTap: () {
-                    Get.toNamed('/sing_up');
+                    Get.back();
                   },
                 ),
               ],

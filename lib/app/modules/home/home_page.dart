@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
                     Icons.list,
                     color: controller.currentPage.value == 0
                         ? AppColors.primary
-                        : AppColors.body,
+                        : AppColors.secudaryColor,
                   )),),
             
             GestureDetector(
@@ -94,7 +94,7 @@ class HomePage extends StatelessWidget {
                     Icons.favorite,
                     color: controller.currentPage.value == 1
                         ? AppColors.primary
-                        : AppColors.body,
+                        : AppColors.secudaryColor,
                   )),)
             
           ],

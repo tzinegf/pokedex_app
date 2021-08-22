@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:pokedex_flutter_app/app/data/models/pokemon_model_help.dart';
 import 'package:pokedex_flutter_app/app/modules/all_pokemons/all_pokemons_controller.dart';
 import 'package:pokedex_flutter_app/app/modules/favorite/favorite_controller.dart';
-import 'package:pokedex_flutter_app/app/modules/pokemon/pokemon_controller.dart';
 import 'package:pokedex_flutter_app/app/modules/pokemon/pokemon_detail_controller.dart';
 import 'package:pokedex_flutter_app/app/shared/themes/app_colors.dart';
 import 'package:pokedex_flutter_app/app/shared/themes/app_text_styles.dart';
@@ -12,7 +11,7 @@ class EditPokemon extends StatelessWidget {
   EditPokemon({Key? key}) : super(key: key);
   AllPokemonsController controller = Get.find<AllPokemonsController>();
   PokemonDetailController pokemonDetailController =
-      Get.put(PokemonDetailController());
+  Get.put(PokemonDetailController());
   FavoriteController favoriteController = Get.put(FavoriteController());
 
   TextEditingController textEditingController = TextEditingController();
@@ -45,7 +44,7 @@ class EditPokemon extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
-            color: Colors.white,
+            color: AppColors.shape,
             elevation: 10,
             margin: EdgeInsets.all(16),
             child: Column(
@@ -117,11 +116,11 @@ class EditPokemon extends StatelessWidget {
                 ),
                 Card(
                   elevation: 2,
-                  color: Colors.yellow[50],
+                  color: AppColors.primaryYellow,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
-                  shadowColor: Colors.black87,
+                  shadowColor: AppColors.grey,
                   child: Obx(
                     () => Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,14 +192,13 @@ class EditPokemon extends StatelessWidget {
                             maxLines: 5,
                             decoration: InputDecoration(
                                 filled: true,
-                                fillColor: Colors.yellow[100],
+                                fillColor: AppColors.secondaryYellow,
                                 disabledBorder: InputBorder.none,
                                 border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10)))),
                           ),
                         ),
-                        // pokemonDetailController.edit.value &&
                         pokemon.captured == 1
                             ? Padding(
                                 padding: EdgeInsets.all(10),
@@ -261,7 +259,7 @@ class EditPokemon extends StatelessWidget {
                                   children: [
                                     Container(
                                         height: 50,
-                                        width: 100,
+                                        
                                         decoration: BoxDecoration(
                                           shape: BoxShape.rectangle,
                                           color: AppColors.grey,
@@ -285,10 +283,18 @@ class EditPokemon extends StatelessWidget {
                                             pokemonDetailController.controller
                                                 .getAllPokemons();
                                           },
-                                          child: Text(
-                                            'CAPTURAR',
-                                            style: TextStyle(
-                                                color: AppColors.shape),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                              'CAPTURAR',
+                                              style: TextStyle(
+                                                  color: AppColors.shape),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Icon(Icons.catching_pokemon,color: AppColors.primary,)
+                                            ], 
                                           ),
                                         )),
                                   ],
