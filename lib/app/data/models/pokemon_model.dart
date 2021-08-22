@@ -1,104 +1,94 @@
-final String tablePokemons = 'pokemons';
-
-
 
 class Pokemon {
-   int? id;
-   String? name;
-   String? comments;
-   bool? captured;
-   bool? observed;
-   bool? favorited;
-   Sprites? sprites;
+  Sprites? sprites;
+  List<Moves>? moves;
+  List<Types>? types;
+  String? comments;
+  bool? captured;
+  bool? observed;
+  bool? favorited;
+  int? height;
+  int? id;
+  String? name;
+  int? weight;
 
-  Pokemon({
-    this.id,
-    this.name,
-    this.comments,
-    this.captured,
-    this.observed, 
-    this.favorited, 
-    this.sprites,
-  });
+  Pokemon(
+      {
+        this.sprites,
+        this.comments,
+      this.captured,
+      this.observed,
+      this.favorited,
+      this.height,
+      this.id,
+      this.name,
+      this.weight});
 
-   Pokemon.fromJson(Map<String, dynamic> json) {
-   
-    id = json['id'];
-    name = json['name'];
+  Pokemon.fromJson(Map<String, dynamic> json) {
     comments = json['comments'];
     captured = json['captured'];
     observed = json['observed'];
     favorited = json['favorited'];
+    height = json['height'];
+    id = json['id'];
+    name = json['name'];
+    weight = json['weight'];
     sprites =
         json['sprites'] != null ? new Sprites.fromJson(json['sprites']) : null;
+        if (json['moves'] != null) {
+      moves = [];
+      json['moves'].forEach((v) {
+        moves!.add(new Moves.fromJson(v));
+      });
+    }
+    if (json['types'] != null) {
+      types = [];
+      json['types'].forEach((v) {
+        types!.add(new Types.fromJson(v));
+      });
+    }
+    
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
     data['comments'] = this.comments;
     data['captured'] = this.captured;
     data['observed'] = this.observed;
     data['favorited'] = this.favorited;
-    if (this.sprites != null) {
+    data['height'] = this.height;
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['weight'] = this.weight;
+     if (this.sprites != null) {
       data['sprites'] = this.sprites!.toJson();
     }
-
     return data;
   }
+
+
 }
+class Moves {
+  Move? move;
 
-class Abilities {
-  Ability? ability;
-  bool? isHidden;
-  int? slot;
+  Moves({this.move});
 
-  Abilities({this.ability, this.isHidden, this.slot});
-
-  Abilities.fromJson(Map<String, dynamic> json) {
-    ability =
-        json['ability'] != null ? new Ability.fromJson(json['ability']) : null;
-    isHidden = json['is_hidden'];
-    slot = json['slot'];
+  Moves.fromJson(Map<String, dynamic> json) {
+    move = json['move'] != null ? new Move.fromJson(json['move']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.ability != null) {
-      data['ability'] = this.ability!.toJson();
+    if (this.move != null) {
+      data['move'] = this.move!.toJson();
     }
-    data['is_hidden'] = this.isHidden;
-    data['slot'] = this.slot;
     return data;
   }
 }
-
-class Ability {
-  String? name;
-  String? url;
-
-  Ability({this.name, this.url});
-
-  Ability.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    url = json['url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['url'] = this.url;
-    return data;
-  }
-}
-
 class Sprites {
   Other? other;
 
-  Sprites({
-    this.other,
-  });
+  Sprites({this.other});
 
   Sprites.fromJson(Map<String, dynamic> json) {
     other = json['other'] != null ? new Other.fromJson(json['other']) : null;
@@ -106,7 +96,6 @@ class Sprites {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-
     if (this.other != null) {
       data['other'] = this.other!.toJson();
     }
@@ -146,6 +135,43 @@ class OfficialArtwork {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['front_default'] = this.frontDefault;
+    return data;
+  }
+}
+
+class Move {
+  String? name;
+
+  Move({this.name});
+
+  Move.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    return data;
+  }
+}
+
+class Types {
+  int? slot;
+  Move? type;
+
+  Types({this.slot, this.type});
+
+  Types.fromJson(Map<String, dynamic> json) {
+    slot = json['slot'];
+    type = json['type'] != null ? new Move.fromJson(json['type']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['slot'] = this.slot;
+    if (this.type != null) {
+      data['type'] = this.type!.toJson();
+    }
     return data;
   }
 }

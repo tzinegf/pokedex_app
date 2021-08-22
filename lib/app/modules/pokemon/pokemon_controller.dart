@@ -20,6 +20,8 @@ class PokemonController extends GetxController {
           comments: '',
           observed: 0,
           favorited: 0,
+          height: pokemon.height,
+          weight: pokemon.weight,
           sprites: pokemon.sprites!.other!.officialArtwork!.frontDefault);
       pokemons.clear();
       pokemons.add(aux);

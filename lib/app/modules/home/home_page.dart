@@ -70,7 +70,7 @@ class HomePage extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.list,
-                    color: controller.currentPage == 0
+                    color: controller.currentPage.value == 0
                         ? AppColors.primary
                         : AppColors.body,
                   )),),
@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.favorite,
-                    color: controller.currentPage == 1
+                    color: controller.currentPage.value == 1
                         ? AppColors.primary
                         : AppColors.body,
                   )),)

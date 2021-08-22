@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pokedex_flutter_app/app/modules/all_pokemons/all_pokemons_controller.dart';
 import 'package:pokedex_flutter_app/app/modules/favorite/favorite_controller.dart';
 import 'package:pokedex_flutter_app/app/modules/pokemon/detail_pokemon.dart';
+import 'package:pokedex_flutter_app/app/modules/pokemon/edit_pokemon.dart';
 import 'package:pokedex_flutter_app/app/shared/themes/app_colors.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -18,6 +19,7 @@ class FavoritePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: AppColors.primary,
           title: Text('Seus Pokemons Favoritos'),
           centerTitle: true,
@@ -48,7 +50,7 @@ class FavoritePage extends StatelessWidget {
                               itemBuilder: (contex, index) {
                                 return ListTile(
                                   onTap:(){
-                                    Get.to(()=>DetailPokemon());
+                                    Get.to(()=>EditPokemon(),arguments: controller.pokemonsFiltered[index]);
                                     },
                                   leading:Hero(tag: controller.pokemonsFiltered[index].name.toString(), child: Image.network(controller.pokemonsFiltered[index].sprites??
                   '')),

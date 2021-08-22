@@ -17,7 +17,12 @@ class AllPokemon extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+      
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          
+          
+
           backgroundColor: AppColors.primary,
           title: Text('Seus Pokemons'),
           centerTitle: true,

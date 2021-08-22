@@ -10,6 +10,12 @@ class PokemonHelp {
    int? observed;
    int? favorited;
    String? sprites;
+   int? height;
+   int? weight;
+  //List<Moves>? moves;
+  //List<Types>? types;
+  
+ 
 
   PokemonHelp({
     this.id,
@@ -19,6 +25,8 @@ class PokemonHelp {
     this.observed, 
     this.favorited, 
     this.sprites,
+    this.height,
+    this.weight
   });
 
    PokemonHelp.fromJson(Map<String, dynamic> json) {
@@ -30,6 +38,8 @@ class PokemonHelp {
     observed = json['observed'];
     favorited = json['favorited'];
     sprites =json['sprites'];
+    height =json['height'];
+    weight =json['weight'];
    }
 
   Map<String, dynamic> toJson() {
@@ -41,6 +51,8 @@ class PokemonHelp {
     data['observed'] = this.observed;
     data['favorited'] = this.favorited;
     data['sprites'] = this.sprites;
+    data['height'] = this.height;
+    data['weight'] = this.weight;
 
     return data;
   }
