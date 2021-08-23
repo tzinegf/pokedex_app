@@ -27,4 +27,12 @@ class PokemonController extends GetxController {
 
     }
   }
+    @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    pokemons.clear();
+    pokemonsFiltered.clear();
+
+  }
 }

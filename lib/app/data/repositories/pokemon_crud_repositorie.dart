@@ -29,4 +29,8 @@ Future getFavoritesPokemons() async {
   Future addIformations(int id,String value) async {
     return await _pokemonDAO.addIformations(id, value);
   }
+   Future closeDb() async {
+    return await _pokemonDAO.closeDb();
+  }
+
 }

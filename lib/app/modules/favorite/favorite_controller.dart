@@ -22,4 +22,12 @@ class FavoriteController extends GetxController {
   Future<void> getFilteredPokemon(String value) async {
     pokemonsFiltered.value = await repositorie.findFavoriteByName(value);
   }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    pokemons.clear();
+    pokemonsFiltered.clear();
+  }
 }

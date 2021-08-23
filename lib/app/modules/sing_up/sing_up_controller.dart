@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SingUpController extends GetxController {
   SharedPreferences? preferences;
-  var viewPass = false.obs;
+  var viewPass = true.obs;
 
   Future<bool> getCredentials(String user) async {
     preferences = await SharedPreferences.getInstance();

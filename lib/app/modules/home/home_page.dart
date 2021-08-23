@@ -15,7 +15,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
+    controller.name.value = name;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(152),
@@ -38,26 +39,26 @@ class HomePage extends StatelessWidget {
                       TextSpan(
                           text: 'visualizados, ',
                           style: AppTextStyles.subTitleBoldHeading),
-                      
                       TextSpan(
                           text: 'capturados',
                           style: AppTextStyles.subTitleBoldHeading),
-                          TextSpan(text: ' e '),
-                          TextSpan(
+                      TextSpan(text: ' e '),
+                      TextSpan(
                           text: 'Favoritos',
                           style: AppTextStyles.subTitleBoldHeading),
-                          
                     ]),
               ),
               trailing: Container(
-                height: 48,
-                width: 48,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Icon(Icons.person,size: 50,)
-              ),
+                  height: 48,
+                  width: 48,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Icon(
+                    Icons.person,
+                    size: 50,
+                  )),
             ),
           ),
         ),

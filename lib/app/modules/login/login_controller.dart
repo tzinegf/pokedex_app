@@ -5,7 +5,6 @@ class LoginController extends GetxController {
   SharedPreferences? preferences;
   var viewPass = true.obs;
 
-
   Future<bool> login(String user, String password) async {
     preferences = await SharedPreferences.getInstance();
     var u =  preferences!.getString(user);

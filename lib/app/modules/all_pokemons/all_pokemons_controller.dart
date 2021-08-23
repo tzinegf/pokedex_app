@@ -1,12 +1,9 @@
 import 'package:get/get.dart';
-import 'package:pokedex_flutter_app/app/data/models/pokemon_model.dart';
 import 'package:pokedex_flutter_app/app/data/models/pokemon_model_help.dart';
 import 'package:pokedex_flutter_app/app/data/repositories/pokemon_crud_repositorie.dart';
-import 'package:pokedex_flutter_app/app/data/repositories/pokemon_repositorie.dart';
 
 class AllPokemonsController extends GetxController {
   PokemonCrudRepositorie repositorie = PokemonCrudRepositorie();
-  
 
   final pokemons = <PokemonHelp>[].obs;
   final pokemonsFiltered = <PokemonHelp>[].obs;
@@ -26,9 +23,16 @@ class AllPokemonsController extends GetxController {
     pokemonsFiltered.value = await repositorie.readPokemon(value);
 
     if (pokemonsFiltered.isNotEmpty) {
-
     } else {
       pokemons.value = await repositorie.getAllPokemons();
     }
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    pokemons.clear();
+    pokemonsFiltered.clear();
   }
 }

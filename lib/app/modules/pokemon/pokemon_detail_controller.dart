@@ -42,4 +42,11 @@ class PokemonDetailController extends GetxController {
     await crudRepositorie.create(pokemon);
     controller.getAllPokemons();
   }
+    @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    pokemons.clear();
+
+  }
 }

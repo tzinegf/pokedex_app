@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:pokedex_flutter_app/app/data/models/pokemon_model.dart';
 
@@ -16,11 +15,10 @@ class PokemonService {
 
         return Pokemon.fromJson(result); 
       } else {
-        print('/*******************erro***************/');
         return 0;
       }
     } catch (e) {
-      throw ('Erro:$e');
+      throw ('Erro: $e');
     }
   }
 }
