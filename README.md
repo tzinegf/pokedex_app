@@ -1,4 +1,4 @@
-# Pokedex Flutter App
+# Pokédex Flutter App
 
 Aplicativo desenvolvido em Flutter para consulta de pokémons utilizando a API [Api pokeapi](https://pokeapi.co) 
 ## Author
