@@ -1,6 +1,6 @@
 # Pokedex Flutter App
 
-Aplicativo desenvolvido em Flutter para consulta de pokemons utilizando a API [Api pokeapi](https://pokeapi.co) 
+Aplicativo desenvolvido em Flutter para consulta de pokémons utilizando a API [Api pokeapi](https://pokeapi.co) 
 ## Author
 
 **Edson Gomes** 
@@ -73,11 +73,11 @@ Aplicativo desenvolvido em Flutter para consulta de pokemons utilizando a API [A
 
 
 > Funcionalidades do App
-* Com o app é possivél buscar por um determinado pokémon, registrar um pokémon como visto ou capturado
-* Após capturar um pokémon é possivel adicionar comentarios sobre o habitat, local de captura, formas de alimentação e outras curiosidades sobre a captura
-* É possivel adicionar um pokémon como favorito
-* É possivel pesquisar por pokémons favoritos
-* É possivel pesquisar por pokémons vistos ou capturados
+* Com o app é possível buscar por um determinado pokémon, registrar um pokémon como visto ou capturado
+* Após capturar um pokémon é possível adicionar comentários sobre o habitat, local de captura, formas de alimentação e outras curiosidades sobre a captura
+* É possível adicionar um pokémon como favorito
+* É possível pesquisar por pokémons favoritos
+* É possível pesquisar por pokémons vistos ou capturados
 
 ## Tecnologias utilizadas
 
@@ -85,5 +85,4 @@ Para este projeto foram utilizados as seguintes tecnologias:
 
 * Dart[https://dart.dev/]
 * Flutter[https://flutter.dev/]
-
 
