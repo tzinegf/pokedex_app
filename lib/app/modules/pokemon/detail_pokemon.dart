@@ -8,8 +8,9 @@ import 'package:pokedex_flutter_app/app/shared/themes/app_text_styles.dart';
 class DetailPokemon extends StatelessWidget {
   DetailPokemon({Key? key}) : super(key: key);
   PokemonController controller = Get.find<PokemonController>();
+
   PokemonDetailController pokemonDetailController =
-      Get.put(PokemonDetailController());
+      Get.find<PokemonDetailController>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +35,9 @@ class DetailPokemon extends StatelessWidget {
                   children: [
                     Hero(
                         tag: controller.pokemons.first.name.toString(),
-                        child: Image.network(
-                            controller.pokemons.first.sprites ?? '')),
+                        child: Image.network(controller.pokemons.first.sprites!
+                            .other!.officialArtwork!.frontDefault
+                            .toString())),
                   ],
                 ),
                 Card(
@@ -142,7 +144,7 @@ class DetailPokemon extends StatelessWidget {
                                     snackPosition: SnackPosition.BOTTOM,
                                     backgroundColor: AppColors.grey,
                                     colorText: AppColors.shape);
-                                    pokemonDetailController.controller
+                                pokemonDetailController.controller
                                     .getAllPokemons();
                               },
                             ),

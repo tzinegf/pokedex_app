@@ -9,7 +9,8 @@ import 'package:pokedex_flutter_app/app/shared/themes/app_text_styles.dart';
 
 class SingUpPage extends StatelessWidget {
   SingUpPage({Key? key}) : super(key: key);
-  SingUpController controller = Get.put(SingUpController());
+
+  SingUpController controller = Get.find<SingUpController>();
 
   TextEditingController userController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -134,7 +135,6 @@ class SingUpPage extends StatelessWidget {
                                 snackPosition: SnackPosition.BOTTOM,
                                 backgroundColor: AppColors.grey,
                                 colorText: AppColors.shape);
-                            
                           } else {
                             Get.defaultDialog(
                                 title: 'Erro',

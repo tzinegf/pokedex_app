@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokedex_flutter_app/app/modules/all_pokemons/all_pokemons_controller.dart';
-import 'package:pokedex_flutter_app/app/modules/login/login_page.dart';
-import 'package:pokedex_flutter_app/app/modules/pokemon/edit_pokemon.dart';
 import 'package:pokedex_flutter_app/app/shared/themes/app_colors.dart';
 
 class AllPokemon extends StatelessWidget {
@@ -10,7 +8,7 @@ class AllPokemon extends StatelessWidget {
 
   AllPokemon({Key? key}) : super(key: key);
 
-  AllPokemonsController controller = Get.put(AllPokemonsController());
+  AllPokemonsController controller = Get.find<AllPokemonsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +19,7 @@ class AllPokemon extends StatelessWidget {
           leading: IconButton(
               icon: Icon(Icons.logout),
               onPressed: () {
-                controller.repositorie.closeDb();
+                // controller.repositorie.closeDb();
 
                 Get.offNamedUntil('/login', (route) => false);
               }),
@@ -53,7 +51,7 @@ class AllPokemon extends StatelessWidget {
                               itemBuilder: (contex, index) {
                                 return ListTile(
                                   onTap: () {
-                                    Get.to(() => EditPokemon(),
+                                    Get.toNamed(('/edit_pokemon'),
                                         arguments:
                                             controller.pokemonsFiltered[index]);
                                   },

@@ -10,11 +10,14 @@ import 'package:pokedex_flutter_app/app/shared/themes/app_text_styles.dart';
 class EditPokemon extends StatelessWidget {
   EditPokemon({Key? key}) : super(key: key);
   AllPokemonsController controller = Get.find<AllPokemonsController>();
-  PokemonDetailController pokemonDetailController =
-      Get.put(PokemonDetailController());
-  FavoriteController favoriteController = Get.put(FavoriteController());
 
-  TextEditingController textEditingController = TextEditingController();
+  PokemonDetailController pokemonDetailController =
+      Get.find<PokemonDetailController>();
+
+  FavoriteController favoriteController = Get.find<FavoriteController>();
+
+  TextEditingController textEditingController =
+      Get.find<TextEditingController>();
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +126,7 @@ class EditPokemon extends StatelessWidget {
                   shadowColor: AppColors.grey,
                   child: Obx(
                     () => Column(
-                     mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
                             child: Text(

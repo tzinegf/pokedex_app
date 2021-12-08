@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pokedex_flutter_app/app/data/models/pokemon_model.dart';
 import 'package:pokedex_flutter_app/app/data/models/pokemon_model_help.dart';
 import 'package:pokedex_flutter_app/app/data/repositories/pokemon_crud_repositorie.dart';
 import 'package:pokedex_flutter_app/app/modules/all_pokemons/all_pokemons_controller.dart';
@@ -7,7 +8,8 @@ class PokemonDetailController extends GetxController {
   PokemonCrudRepositorie crudRepositorie = PokemonCrudRepositorie();
   AllPokemonsController controller = Get.put(AllPokemonsController());
 
-  final pokemons = <PokemonHelp>[].obs;
+  //final pokemons = <PokemonHelp>[].obs;
+  final pokemons = <Pokemon>[].obs;
   RxInt favorited = 0.obs;
   RxInt captured = 0.obs;
   RxBool edit = false.obs;
@@ -17,7 +19,7 @@ class PokemonDetailController extends GetxController {
     super.onInit();
   }
 
-  Future<void> addPokemonToDatabase(PokemonHelp value) async {
+  Future<void> addPokemonToDatabase(Pokemon value) async {
     pokemons.add(value);
   }
 
@@ -36,10 +38,10 @@ class PokemonDetailController extends GetxController {
   }
 
   Future<void> create(
-    PokemonHelp pokemon, bool isCaptured, bool isObserved) async {
-    pokemon.captured = isCaptured ? 1 : 0;
-    pokemon.observed = isObserved ? 1 : 0;
-    await crudRepositorie.create(pokemon);
+    Pokemon pokemon, bool isCaptured, bool isObserved) async {
+    pokemon.captured = isCaptured ? true : false;
+    pokemon.observed = isObserved ? true : false;
+    await crudRepositorie.create(pokemon,1);
     controller.getAllPokemons();
   }
     @override

@@ -1,11 +1,12 @@
+import 'package:pokedex_flutter_app/app/data/models/pokemon_model.dart';
 import 'package:pokedex_flutter_app/app/data/models/pokemon_model_help.dart';
 import 'package:pokedex_flutter_app/db/pokemons_dao.dart';
 class PokemonCrudRepositorie {
   
   final PokemonDAO _pokemonDAO = PokemonDAO();
 
-   Future create(PokemonHelp value) async {
-    return await _pokemonDAO.save(value);
+   Future create(Pokemon value,int id) async {
+    return await _pokemonDAO.save(value,id);
   }
 Future getAllPokemons() async {
     return await _pokemonDAO.findAll();
@@ -31,6 +32,16 @@ Future getFavoritesPokemons() async {
   }
    Future closeDb() async {
     return await _pokemonDAO.closeDb();
+  }
+
+    Future<bool> findNickName(String nickname) async {
+    return await _pokemonDAO.findNickName(nickname);
+  }
+   Future<List<Map>> findUser(String nickname,String password) async {
+    return await _pokemonDAO.findUser(nickname,password);
+  }
+   Future<int> createUser(String nickname,String senha) async {
+    return await _pokemonDAO.createUser(nickname, senha);
   }
 
 }

@@ -3,14 +3,13 @@ import 'package:get/get.dart';
 import 'package:pokedex_flutter_app/app/modules/all_pokemons/all_pokemons.dart';
 import 'package:pokedex_flutter_app/app/modules/favorite/favorite_page.dart';
 import 'package:pokedex_flutter_app/app/modules/home/home_controller.dart';
-import 'package:pokedex_flutter_app/app/modules/pokemon/new_pokemon.dart';
 import 'package:pokedex_flutter_app/app/shared/themes/app_colors.dart';
 import 'package:pokedex_flutter_app/app/shared/themes/app_text_styles.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
-  HomeController controller = Get.put(HomeController());
+  HomeController controller = Get.find<HomeController>();
   var name = Get.arguments;
 
   @override
@@ -99,7 +98,9 @@ class HomePage extends StatelessWidget {
                     color: AppColors.primary,
                   ),
                   onPressed: () {
-                    Get.to(() => NewPokemon());
+                    Get.toNamed(
+                      ('/new_pokemon'),
+                    );
                   },
                 ),
               ),

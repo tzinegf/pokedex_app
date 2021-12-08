@@ -14,15 +14,18 @@ class Pokemon {
 
   Pokemon(
       {
-        this.sprites,
-        this.comments,
+      this.sprites,
+      this.comments,
       this.captured,
       this.observed,
       this.favorited,
       this.height,
       this.id,
       this.name,
-      this.weight});
+      this.weight,
+      this.moves,
+      this.types
+      });
 
   Pokemon.fromJson(Map<String, dynamic> json) {
     comments = json['comments'];

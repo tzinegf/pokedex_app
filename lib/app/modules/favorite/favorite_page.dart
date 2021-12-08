@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:pokedex_flutter_app/app/modules/favorite/favorite_controller.dart';
-
-import 'package:pokedex_flutter_app/app/modules/pokemon/edit_pokemon.dart';
 import 'package:pokedex_flutter_app/app/shared/themes/app_colors.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -12,7 +9,7 @@ class FavoritePage extends StatelessWidget {
 
   FavoritePage({Key? key}) : super(key: key);
 
-  FavoriteController controller = Get.put(FavoriteController());
+  FavoriteController controller = Get.find<FavoriteController>();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +45,7 @@ class FavoritePage extends StatelessWidget {
                               itemBuilder: (contex, index) {
                                 return ListTile(
                                   onTap: () {
-                                    Get.to(() => EditPokemon(),
+                                    Get.toNamed(('/edit_pokemon'),
                                         arguments:
                                             controller.pokemonsFiltered[index]);
                                   },

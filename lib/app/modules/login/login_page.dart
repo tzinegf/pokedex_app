@@ -7,9 +7,10 @@ import 'package:pokedex_flutter_app/app/shared/themes/app_text_styles.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
-  LoginController controller = Get.put(LoginController());
-  TextEditingController userController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+
+  LoginController controller = Get.find<LoginController>();
+  TextEditingController userController = Get.find<TextEditingController>();
+  TextEditingController passwordController = Get.find<TextEditingController>();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -92,9 +93,13 @@ class LoginPage extends StatelessWidget {
                           var x = await controller.login(
                               userController.text, passwordController.text);
                           if (x) {
-                            Get.toNamed('/home',arguments: userController.text);
+                            Get.toNamed('/home',
+                                arguments: userController.text);
                           } else {
-                            Get.defaultDialog(title: 'Erro',middleText:'Usuário não registrado',radius: 10);
+                            Get.defaultDialog(
+                                title: 'Erro',
+                                middleText: 'Usuário não registrado',
+                                radius: 10);
                           }
                         }
                       },

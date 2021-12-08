@@ -5,7 +5,10 @@ import 'package:pokedex_flutter_app/app/modules/home/home_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
- const String CREATE_POKEMONS_TABLE_SCRIPT = 'CREATE TABLE  if not exists pokemons(id INTEGER PRIMARY KEY, name TEXT, comments TEXT, captured BOOLEAN, observed BOOLEAN,favorited BOOLEAN, sprites TEXT,height INTEGER,weight INTEGER);';
+ const String CREATE_POKEMONS_TABLE_SCRIPT = 'CREATE TABLE  if not exists pokemons(id INTEGER PRIMARY KEY, name TEXT, comments TEXT, captured BOOLEAN, observed BOOLEAN,favorited BOOLEAN, sprites TEXT,height INTEGER,weight INTEGER, userId INTEGER, FOREIGN KEY(userId) REFERENCES users(id));';
+  const String CREATE_USERS_TABLE_SCRIPT = 'CREATE TABLE  if not exists users(id INTEGER PRIMARY KEY, nickname TEXT,password TEXT);';
+ 
+
 class DatabaseHelper {
   HomeController controller = Get.put(HomeController());
 
@@ -36,33 +39,28 @@ class DatabaseHelper {
 
     return _db!;
   }
-  
-/*
-  Future<Database> _getDatabase() async {
- 
-}
-*/
+
+
   Future _initDb() async {
-    var x = await getCredentials(controller.name.value);
-
-
      return openDatabase(
-    join(await getDatabasesPath(), x, 'pokemons.db'),
-    onCreate: (db, version) {
-      return db.execute(CREATE_POKEMONS_TABLE_SCRIPT);
-    },
+    join(await getDatabasesPath(), 'pokemons.db'),
+    onCreate:_onCreate ,onConfigure: _onConfigure,
     version: 1,
   );
 
   }
 
+   Future _onConfigure(Database db) async {
+    await db.execute('PRAGMA foreign_keys = ON');
+}
+
 //Método para criar uma nova tabela no DB
-  /*void _onCreate(Database db, int newVersion) async {
-    await db.execute(
-        'CREATE TABLE  if not exists pokemons(id INTEGER PRIMARY KEY, name TEXT, comments TEXT'
-        ', captured BOOLEAN, observed BOOLEAN,favorited BOOLEAN, sprites TEXT,height INTEGER,weight INTEGER);');
+  void _onCreate(Database db, int newVersion) async {
+    await db.execute(CREATE_USERS_TABLE_SCRIPT);
+    await db.execute(CREATE_POKEMONS_TABLE_SCRIPT);
+        
   }
-*/
+
 //Método para fechar a conexão com o DB
   Future close() async {
     var dbClient = await db;

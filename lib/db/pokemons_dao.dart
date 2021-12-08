@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:get/get_connect/sockets/src/socket_notifier.dart';
+import 'package:pokedex_flutter_app/app/data/models/pokemon_model.dart';
 import 'package:pokedex_flutter_app/app/data/models/pokemon_model_help.dart';
 import 'package:pokedex_flutter_app/db/db_helper.dart';
 import 'package:sqflite/sqflite.dart';
@@ -8,6 +9,22 @@ class PokemonDAO {
   DatabaseHelper instance = DatabaseHelper();
 
 // Método para criar um novo pokemon no banco de dados
+
+
+
+
+
+
+
+ Future<int> save(Pokemon  pokemon, int id) async {
+   final db = await instance.db;
+    return await db.rawInsert(
+        'INSERT INTO pokemons (name, comments, captured, observed, favorited, sprites , height, weight, userId VALUES(?,?,?,?,?,?,?,?,?);',
+        [pokemon.name, pokemon.comments,pokemon.captured,pokemon.observed,pokemon.favorited,pokemon.sprites,pokemon.height,pokemon.weight,id]);
+  }
+
+
+/*
   Future<int> save(PokemonHelp pokemon) async {
     final db = await instance.db;
     var id = await db.insert("pokemons", pokemon.toJson(),
@@ -15,7 +32,7 @@ class PokemonDAO {
     print('id: $id');
     return id;
   }
-
+*/
 // Método para buscar todos os pokemons no banco de dados
   Future<List<PokemonHelp>> findAll() async {
     final db = await instance.db;
@@ -119,5 +136,30 @@ class PokemonDAO {
   Future<void> closeDb() async {
     final db = await instance.db;
     await db.close();
+  }
+
+  Future<bool> findNickName(String nickname) async {
+    final db = await instance.db;
+    final list =
+        await db.rawQuery('SELECT nickname FROM users WHERE nickname = ? ;', [nickname]);
+    if (list.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<int> createUser(String nickname, String password) async {
+    final db = await instance.db;
+    return await db.rawInsert(
+        'INSERT INTO users (nickname,password )VALUES(?,?);',
+        [nickname, password]);
+  }
+
+  Future<List<Map>> findUser(String nickname, String password) async {
+    final db = await instance.db;
+    return await db.rawQuery(
+        'SELECT * FROM users WHERE nickname = ? and password = ?;',
+        [nickname, password]);
   }
 }

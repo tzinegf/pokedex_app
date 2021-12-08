@@ -1,38 +1,38 @@
 import 'package:get/get.dart';
-import 'package:pokedex_flutter_app/app/data/models/pokemon_model_help.dart';
+import 'package:pokedex_flutter_app/app/data/models/pokemon_model.dart';
 import 'package:pokedex_flutter_app/app/data/repositories/pokemon_repositorie.dart';
+
 class PokemonController extends GetxController {
   PokemonRepositorie repositorie = PokemonRepositorie();
 
-  final pokemons = <PokemonHelp>[].obs;
-  final pokemonsFiltered = <PokemonHelp>[].obs;
+  final pokemons = <Pokemon>[].obs;
+  final pokemonsFiltered = <Pokemon>[].obs;
 
   Future<void> getFilteredPokemon(String value) async {
     var pokemon = await repositorie.getPokemon(value.toLowerCase());
 
     if (pokemon != null && pokemon != 0) {
-      PokemonHelp aux = PokemonHelp(
+      Pokemon aux = Pokemon(
           name: pokemon.name,
-          captured: 0,
+          captured: false,
           id: pokemon.id,
           comments: '',
-          observed: 0,
-          favorited: 0,
+          observed: false,
+          favorited: false,
           height: pokemon.height,
           weight: pokemon.weight,
-          sprites: pokemon.sprites!.other!.officialArtwork!.frontDefault);
+          sprites: pokemon.sprites);
       pokemons.clear();
       pokemons.add(aux);
       pokemonsFiltered.value = pokemons;
-
     }
   }
-    @override
+
+  @override
   void onClose() {
     // TODO: implement onClose
     super.onClose();
     pokemons.clear();
     pokemonsFiltered.clear();
-
   }
 }

@@ -12,6 +12,7 @@ class HomeController extends GetxController {
   void setPage(int index) {
     currentPage.value = index;
   }
+
   @override
   void onClose() {
     // TODO: implement onClose
